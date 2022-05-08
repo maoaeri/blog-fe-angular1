@@ -1,9 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, of } from "rxjs";
 import { map, catchError, tap } from "rxjs/operators";
 import { User } from "src/models/user.model";
 import { environment } from "src/environments/environment";
+import { Router } from "@angular/router";
+import { ErrorHandlerService } from "./error-handler.service";
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -11,7 +13,9 @@ export class UserService {
     public user: Observable<User>;
     
     constructor(
-        private http: HttpClient
+        private router: Router,
+        private http: HttpClient,
+        private errorHandler: ErrorHandlerService
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
         this.user = this.userSubject.asObservable();
@@ -19,26 +23,6 @@ export class UserService {
 
     public get userValue(): User {
         return this.userSubject.value;
-    }
-
-    /**
-     * Handle Http operation that failed.
-     * Let the app continue.
-     * @param operation - name of the operation that failed
-     * @param result - optional value to return as the observable result
-     */
-    private handleError<T>(operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-    
-        // TODO: send the error to remote logging infrastructure
-        console.error(error); // log to console instead
-    
-        // TODO: better job of transforming error for user consumption
-        this.log(`${operation} failed: ${error.message}`);
-    
-        // Let the app keep running by returning an empty result.
-        return of(result as T);
-        };
     }
 
     login(username: string, password: string) {
@@ -65,20 +49,21 @@ export class UserService {
     getAllUsers(): Observable<User[]>{
         return this.http.get<User[]>(`${environment.apiUrl}/users`)
         .pipe(
-            catchError(this.handleError<User[]>('getAllUsers', []))
+            catchError(this.errorHandler.handleError<User[]>('getAllUsers', []))
         );
     }
 
     getUserById(id: number): Observable<User> {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`)
         .pipe(
-            catchError(this.handleError<User>(`getUserById ${id}`))
+            catchError(this.errorHandler.handleError<User>(`getUserById ${id}`))
         );
     }
 
     updateUser(id:number, updateInfo: User) {
         return this.http.put(`${environment.apiUrl}/users/${id}`, updateInfo)
         .pipe(
+            catchError(this.errorHandler.handleError<User>(`updateUser ${id}`)),
             map(x => {
                 if (id == this.userValue.userId) {
                     let user = updateInfo;
