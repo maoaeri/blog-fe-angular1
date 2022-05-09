@@ -33,6 +33,13 @@ export class PostService {
             catchError(this.errorHandler.handleError('deletePost'))
         )
     }
+    
+    deleteAllPosts(){
+        return this.http.delete(`${environment.apiUrl}/posts`)
+        .pipe(
+            catchError(this.errorHandler.handleError('deleteAllPosts'))
+        )        
+    }
 
     getPost(id: number){
         return this.http.get<Post>(`${environment.apiUrl}/posts/${id}`)
