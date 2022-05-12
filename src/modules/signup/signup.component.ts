@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +26,7 @@ export class SignupComponent implements OnInit {
       this.form = this.formBuilder.group({
           username: ['', Validators.required],
           email: ['', Validators.required],
-          password: ['', Validators.required, Validators.minlength(6)],
+          password: ['', Validators.required, Validators.minLength(6)],
           fullname: ['', Validators.required],
           birthday: ['', Validators.required],
           address: ['', Validators.required],

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { BehaviorSubject, Observable, of } from "rxjs";
 import { map, catchError, tap } from "rxjs/operators";
 import { User } from "src/models/user.model";
@@ -25,22 +25,28 @@ export class UserService {
         return this.userSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<User>(`${environment.apiUrl}/users/login`, JSON.stringify({username, password}))
-        .pipe(map(user => {
+    login(email: string, password: string) {
+        return this.http.post<User>(`${environment.apiUrl}/users/login`, JSON.stringify({email, password}),
+        {headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })})
+        .pipe(
+            catchError(this.errorHandler.handleError<User>(`login`)),
+            map(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('user', JSON.stringify(user));
             this.userSubject.next(user);
             return user;
-        }));    
+        })
+        );    
     }
 
-    logout() {
-        // remove user from local storage and set current user to null
-        localStorage.removeItem('user');
-        this.userSubject.next(null);
-        this.router.navigate(['/users/login']);       
-    }
+    // logout() {
+    //     // remove user from local storage and set current user to null
+    //     localStorage.removeItem('user');
+    //     this.userSubject.next(null);
+    //     this.router.navigate(['/users/login']);       
+    // }
 
     signup(user: User) {
         return this.http.post(`${environment.apiUrl}/users/signup`, JSON.stringify(user));
