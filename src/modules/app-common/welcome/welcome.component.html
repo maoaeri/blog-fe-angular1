@@ -1,13 +1,27 @@
 <head></head>
 <body>
-    <div class="welcome">
-        <h1>Welcome To Mao's Blog</h1>
-        <div *ngIf="a">
-            Hello, {{a.username}}
-        </div>
-        <!-- <img href="./../../../assets/images/background.jpg"> -->
-        <button class="col-md-0.5 offset-md-0" style="left:40%" type="button" onclick="location.href='http://localhost:4200/login'">Sign Up</button>
-        <button class="col-md-0.5 offset-md-0" style="left:50%" type="button" >Home</button>
-        <button class="col-md-0.5 offset-md-0.5" style="left:60%" type="button" onclick="location.href='http://localhost:4200/login'">Log In</button>
-    </div>
+  <div class="welcome">
+    <h1>Welcome To Mao's Blog</h1>
+    <div *ngIf="a">Hello, {{ a.username }}</div>
+    <!-- <img href="./../../../assets/images/background.jpg"> -->
+    <button
+      class="col-md-0.5 offset-md-0"
+      style="left:40%"
+      type="button"
+      onclick="location.href='http://localhost:4200/signup'"
+    >
+      Sign Up
+    </button>
+    <button class="col-md-0.5 offset-md-0" style="left:50%" type="button">
+      Home
+    </button>
+    <button
+      class="col-md-0.5 offset-md-0.5"
+      style="left:60%"
+      type="button"
+      onclick="location.href='http://localhost:4200/login'"
+    >
+      Log In
+    </button>
+  </div>
 </body>
