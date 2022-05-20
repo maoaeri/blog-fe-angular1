@@ -6,22 +6,24 @@ import { User } from "src/models/user.model";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
 import { ErrorHandlerService } from "./error-handler.service";
+// import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    private userSubject: BehaviorSubject<User>;
-    public user: Observable<User>;
+    private userSubject: BehaviorSubject<User | null>;
+    public user: Observable<User | null>;
     
     constructor(
         private router: Router,
         private http: HttpClient,
-        private errorHandler: ErrorHandlerService
+        private errorHandler: ErrorHandlerService,
     ) {
-        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+        this.userSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
         this.user = this.userSubject.asObservable();
     }
 
-    public get userValue(): User {
+    public get userValue(): User | null {
         return this.userSubject.value;
     }
 
@@ -34,22 +36,30 @@ export class UserService {
             catchError(this.errorHandler.handleError<User>(`login`)),
             map(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('jwt_token', JSON.parse(JSON.stringify(user)).token);
             this.userSubject.next(user);
             return user;
         })
         );    
     }
 
-    // logout() {
-    //     // remove user from local storage and set current user to null
-    //     localStorage.removeItem('user');
-    //     this.userSubject.next(null);
-    //     this.router.navigate(['/users/login']);       
-    // }
+    logout() {
+        // remove user from local storage and set current user to null
+        localStorage.removeItem('user');
+        this.userSubject.next(null);
+        this.router.navigate(['/users/login']);       
+    }
+
+    isLoggedIn() {
+
+    }
 
     signup(user: User) {
-        return this.http.post(`${environment.apiUrl}/users/signup`, JSON.stringify(user));
+        console.log(user)
+        return this.http.post(`${environment.apiUrl}/users/signup`, JSON.stringify(user),
+        {headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })});
     }
 
     getAllUsers(): Observable<User[]>{
@@ -71,7 +81,7 @@ export class UserService {
         .pipe(
             catchError(this.errorHandler.handleError<User>(`updateUser ${id}`)),
             map(x => {
-                if (id == this.userValue.userId) {
+                if (this.userValue != null && id == this.userValue.userId) {
                     let user = updateInfo;
                     localStorage.setItem('user', JSON.stringify(user));
                     this.userSubject.next(user)

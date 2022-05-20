@@ -24,6 +24,13 @@ const routes: Routes = [
     ),
   },
   {
+    path: 'signup',
+    loadChildren: () =>
+    import('../modules/signup/signup-routing.module').then(
+        m => m.SignupRoutingModule
+    ),
+  },
+  {
     path: '**',
     loadChildren: () =>
     import('../modules/page-not-found/page-not-found-routing.module').then(

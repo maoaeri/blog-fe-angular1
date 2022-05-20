@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { UserService } from 'src/services/user.service';
+import { User } from 'src/models/user.model'
 
 @Component({
   selector: 'app-signup',
@@ -47,8 +48,18 @@ export class SignupComponent implements OnInit {
           return;
       }
 
+      let data: User = {
+          userId: null,
+          username: this.f.username.value,
+          email: this.f.email.value,
+          password: this.f.password.value,
+          fullname: this.f.fullname.value,
+          birthday: this.f.birthday.value,
+          address: this.f.address.value
+      }
+
       this.loading = true;
-      this.userService.login(this.f.username.value, this.f.password.value)
+      this.userService.signup(data)
           .pipe(first())
           .subscribe({
               next: () => {
