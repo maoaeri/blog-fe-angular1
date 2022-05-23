@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { UserService } from 'src/services/user.service';
+import { UserService } from '../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css']
+  styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent implements OnInit {
   form!: FormGroup;
@@ -16,47 +16,50 @@ export class LoginPageComponent implements OnInit {
   submitted = false;
 
   constructor(
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private router: Router,
-      private userService: UserService
-      // private alertService: AlertService
-  ) { }
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService
+  ) // private alertService: AlertService
+  {}
 
   ngOnInit() {
-      this.form = this.formBuilder.group({
-          email: ['', Validators.required],
-          password: ['', Validators.required]
-      });
+    this.form = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.form.controls; }
+  get f() {
+    return this.form.controls;
+  }
 
   onSubmit() {
-      this.submitted = true;
+    this.submitted = true;
 
-      // // reset alerts on submit
-      // // this.alertService.clear();
+    // // reset alerts on submit
+    // // this.alertService.clear();
 
-      // stop here if form is invalid
-      if (this.form.invalid) {
-          return;
-      }
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+    }
 
-      this.loading = true;
-      this.userService.login(this.f.email.value, this.f.password.value)
-          .pipe(first())
-          .subscribe({
-              next: () => {
-                  // get return url from query parameters or default to home page
-                  const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-                  this.router.navigateByUrl(returnUrl);
-              },
-              error: (error: any) => {
-                  // this.alertService.error(error);
-                  this.loading = false;
-              }
-          });
+    this.loading = true;
+    this.userService
+      .login(this.f.email.value, this.f.password.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          // get return url from query parameters or default to home page
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          this.router.navigateByUrl(returnUrl);
+        },
+        error: (error: any) => {
+          // this.alertService.error(error);
+          this.loading = false;
+        },
+      });
   }
 }

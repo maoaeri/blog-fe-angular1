@@ -1,20 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { JwtService } from 'src/services/jwt.service';
+import { JwtService } from '../../../services/jwt.service';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.css']
+  styleUrls: ['./welcome.component.css'],
 })
 export class WelcomeComponent implements OnInit {
+  constructor(private jwtService: JwtService) {}
 
-  constructor(
-    private jwtService: JwtService
-  ) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  a = this.jwtService.getTokenInfor()
-
+  a = this.jwtService.getTokenInfor();
 }
