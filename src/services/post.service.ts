@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post } from '../models/post.model';
@@ -43,9 +43,19 @@ export class PostService {
       .pipe(catchError(this.errorHandler.handleError('getPost', null)));
   }
 
-  getAllPost(id: number) {
-    return this.http
-      .get<Post[]>(`${environment.apiUrl}/posts`)
-      .pipe(catchError(this.errorHandler.handleError('getAllPosts', [])));
-  }
+  getAllPosts(page: number) {
+    const res = this.http
+      .get<Post[]>(
+        `${environment.apiUrl}/posts?page=${page}`,
+        {
+          headers: new HttpHeaders({
+            'Authorization': 'Bearer '+localStorage.getItem('jwt_token'),
+          }),
+        }
+      )
+      .pipe(
+        catchError(this.errorHandler.handleError('getAllPosts', []))
+        );
+    return res
+    }
 }

@@ -3,8 +3,9 @@
     <app-header></app-header>
     <div class="welcome">
         <h1 class="bg-gradient-to-r from-cyan-500 to-blue-500 rounded">Welcome To Mao's Blog</h1>
-        <div *ngIf="a">
-            Hello, {{a.username}}
+        <div *ngFor="let post of posts">
+            <h3>{{post.content}}</h3>
+            <h4>{{post.userId}}</h4>
         </div>
         <!-- <img href="./../../../assets/images/background.jpg"> -->
         <button class="col-md-0.5 offset-md-0" style="left:40%" type="button" onclick="location.href='http://localhost:4200/signup'">Sign Up</button>

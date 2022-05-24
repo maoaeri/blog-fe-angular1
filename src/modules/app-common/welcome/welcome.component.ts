@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from 'src/models/post.model';
+import { PostService } from 'src/services/post.service';
 import { JwtService } from '../../../services/jwt.service';
 
 @Component({
@@ -7,9 +9,24 @@ import { JwtService } from '../../../services/jwt.service';
   styleUrls: ['./welcome.component.css'],
 })
 export class WelcomeComponent implements OnInit {
-  constructor(private jwtService: JwtService) {}
 
-  ngOnInit(): void {}
+  posts : Post[] = []
 
-  a = this.jwtService.getTokenInfor();
+  constructor(
+    private jwtService: JwtService,
+    private postService: PostService
+  ) {}
+
+  ngOnInit(): void {
+    this.getAllPosts()
+  }
+
+  getAllPosts(): void{
+    this.postService.getAllPosts(0)
+    .subscribe(posts => {
+      this.posts = posts;
+      console.log(this.posts)})
+    console.log(this.posts)
+  }
+
 }
