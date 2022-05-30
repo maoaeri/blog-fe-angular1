@@ -28,6 +28,10 @@ export class UserService {
     return this.userSubject.value;
   }
 
+  public get tokenString(): string | null {
+    return localStorage.getItem('jwt_token')
+  }
+
   login(email: string, password: string) {
     return this.http
       .post<User>(

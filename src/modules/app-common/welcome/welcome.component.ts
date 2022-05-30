@@ -24,9 +24,7 @@ export class WelcomeComponent implements OnInit {
   getAllPosts(): void{
     this.postService.getAllPosts(0)
     .subscribe(posts => {
-      this.posts = posts;
-      console.log(this.posts)})
-    console.log(this.posts)
+      this.posts = posts})
   }
 
 }
