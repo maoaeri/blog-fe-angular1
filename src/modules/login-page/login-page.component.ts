@@ -37,7 +37,7 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
+    console.log(this.submitted)
     // // reset alerts on submit
     // // this.alertService.clear();
 
@@ -45,6 +45,8 @@ export class LoginPageComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+
+
 
     this.loading = true;
     this.userService

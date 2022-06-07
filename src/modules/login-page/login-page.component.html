@@ -16,34 +16,42 @@
             <div class="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:ml-20 xl:w-5/12">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <!-- Email input -->
-                <div class="mb-6">
-                  <input type="text" class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-red-400 focus:bg-white focus:text-gray-700 focus:outline-none" id="exampleFormControlInput2" placeholder="Email address" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div class="mb-6 form-group">
+                  <input type="text" class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-red-400 focus:bg-white focus:text-gray-700 focus:outline-none" placeholder="Email address" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-red-700">
                     <div *ngIf="f.email.errors.required">Email is required</div>
                   </div>
                 </div>
       
                 <!-- Password input -->
-                <div class="mb-6">
-                  <input type="password" class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-red-400 focus:bg-white focus:text-gray-700 focus:outline-none" id="exampleFormControlInput2" placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+                <div class="mb-6 form-group">
+                  <input type="password" class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-red-400 focus:bg-white focus:text-gray-700 focus:outline-none" placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback text-red-700">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                  </div>
                 </div>
       
                 <div class="mb-6 flex items-center justify-between">
                   <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input checked:bg-róe-600 float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-gray-300 bg-white bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-red-400 focus:outline-none" id="exampleCheck2" />
-                    <label class="form-check-label inline-block text-gray-800" for="exampleCheck2">Remember me</label>
+                    <input type="checkbox" class="form-check-input checked:bg-rose-600 float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-gray-300 bg-white bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-red-400 focus:outline-none" id="exampleCheck2" />
+                    <label class="form-check-label inline-block text-gray-800">Remember me</label>
                   </div>
                   <a href="#!" class="text-gray-800">Forgot password?</a>
                 </div>
       
-                <div class="text-center lg:text-left">
-                  <button 
-                  type="button" 
-                  class="inline-block rounded bg-rose-400 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-rose-600 hover:shadow-lg focus:bg-rose-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-rose-800 active:shadow-lg"
-                  [disabled]="loading">Login</button>
+                <div class="text-center lg:text-left form-group">
+                  <button [disabled]="loading" type="submit"
+                  class="inline-block rounded bg-rose-400 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-rose-600 hover:shadow-lg focus:bg-rose-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-rose-800 active:shadow-lg">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Login
+                  </button>
+                  <!-- <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Login
+                </button> -->
                   <p class="mt-2 mb-0 pt-1 text-sm font-semibold">
                     Don't have an account?
-                    <a href="#!" class="text-red-600 transition duration-200 ease-in-out hover:text-red-700 focus:text-red-700">Register</a>
+                    <a routerLink="../signup" class="text-red-600 transition duration-200 ease-in-out hover:text-red-700 focus:text-red-700">Sign Up</a>
                   </p>
                 </div>
               </form>
@@ -55,8 +63,8 @@
       
       
 
-<!-- 
-	<body class="img js-fullheight" style="background-color: rgb(188, 95, 119);">
+
+	<!-- <body class="img js-fullheight" style="background-color: rgb(188, 95, 119);">
         <div class="card">
             <h4 class="card-header">Login</h4>
             <div class="card-body">
@@ -85,5 +93,4 @@
                 </form>
             </div>
         </div>
-	</body>
-</html> -->
+	</body> -->

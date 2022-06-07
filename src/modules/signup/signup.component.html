@@ -7,7 +7,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
 	</head> -->
-	<body class="img js-fullheight" style="background-color: rgb(237, 165, 183);">
+	<!-- <body class="img js-fullheight" style="background-color: rgb(237, 165, 183);">
         <div class="card">
             <h4 class="card-header">Sign Up</h4>
             <div class="card-body">
@@ -63,5 +63,86 @@
                 </form>
             </div>
         </div>
-	</body>
+	</body> -->
 <!-- </html> -->
+
+<section class="h-screen">
+    <div class="h-full px-6 text-gray-800">
+      <div class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between xl:justify-center">
+        <div class="shrink-1 mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="w-full" alt="Sample image" />
+        </div>
+        <div class="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:ml-20 xl:w-5/12">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <!-- Email input -->
+            <div class="mb-6 form-group">
+              <input type="text" class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-red-400 focus:bg-white focus:text-gray-700 focus:outline-none" placeholder="Email address" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-red-700">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+              </div>
+            </div>
+
+            <!-- Username input -->
+            <div class="mb-6 form-group">
+                <input type="text" class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-red-400 focus:bg-white focus:text-gray-700 focus:outline-none" placeholder="Username" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback text-red-700">
+                  <div *ngIf="f.username.errors.required">Username is required</div>
+                </div>
+              </div>
+  
+            <!-- Password input -->
+            <div class="mb-6 form-group">
+              <input type="password" class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-red-400 focus:bg-white focus:text-gray-700 focus:outline-none" placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback text-red-700">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+              </div>
+            </div>
+
+            <!-- Fullname input -->
+            <div class="mb-6 form-group">
+                <input type="text" class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-red-400 focus:bg-white focus:text-gray-700 focus:outline-none" placeholder="Fullname" formControlName="fullname" [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }" />
+                <div *ngIf="submitted && f.fullname.errors" class="invalid-feedback text-red-700">
+                  <div *ngIf="f.fullname.errors.required">Fullname is required</div>
+                </div>
+              </div>
+
+            <!-- Address input -->
+            <div class="mb-6 form-group">
+                <input type="text" class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-red-400 focus:bg-white focus:text-gray-700 focus:outline-none" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+                <div *ngIf="submitted && f.address.errors" class="invalid-feedback text-red-700">
+                  <div *ngIf="f.address.errors.required">Address is required</div>
+                </div>
+              </div>
+
+            <!-- Birthday input -->
+            <div class="mb-6 form-group">
+                <input type="date" class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-red-400 focus:bg-white focus:text-gray-700 focus:outline-none" placeholder="birthday" formControlName="birthday" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }" />
+                <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback text-red-700">
+                  <div *ngIf="f.birthday.errors.required">Birthday is required</div>
+                </div>
+              </div>
+  
+            <div class="mb-6 flex items-end justify-end">
+              <a href="#!" class="text-gray-800 justify-end">Forgot password?</a>
+            </div>
+  
+            <div class="text-center lg:text-left form-group">
+              <button [disabled]="loading" type="submit"
+              class="inline-block rounded bg-rose-400 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-rose-600 hover:shadow-lg focus:bg-rose-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-rose-800 active:shadow-lg">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Login
+              </button>
+              <!-- <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Login
+            </button> -->
+              <p class="mt-2 mb-0 pt-1 text-sm font-semibold">
+                Already had an account?
+                <a routerLink="../login" class="text-red-600 transition duration-200 ease-in-out hover:text-red-700 focus:text-red-700">Log In</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
