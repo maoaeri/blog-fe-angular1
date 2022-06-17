@@ -5,7 +5,7 @@ import { environment } from "src/environments/environment";
 import { UserService } from "src/services/user.service";
 
 @Injectable()
-export class JwrInterceptor implements HttpInterceptor{
+export class JwtInterceptor implements HttpInterceptor{
     constructor(
         private userService: UserService
     ) { }

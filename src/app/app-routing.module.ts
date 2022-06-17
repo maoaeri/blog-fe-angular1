@@ -10,13 +10,6 @@ const routes: Routes = [
     ),
   },
   {
-    path: 'home',
-    loadChildren: () =>
-    import('../modules/home/home-routing.module').then(
-        m => m.HomeRoutingModule
-    ),
-  },
-  {
     path: 'login',
     loadChildren: () =>
     import('../modules/login-page/login-page-routing.module').then(
@@ -31,12 +24,20 @@ const routes: Routes = [
     ),
   },
   {
+    path:'aboutus',
+    loadChildren: () =>
+    import('../modules/aboutus/aboutus-routing.module').then(
+      m => m.AboutusRoutingModule
+    ),
+  },
+  {
     path: '**',
     loadChildren: () =>
     import('../modules/page-not-found/page-not-found-routing.module').then(
         m => m.PageNotFoundRoutingModule
     ),
-  }
+  },
+
 ];
 
 @NgModule({

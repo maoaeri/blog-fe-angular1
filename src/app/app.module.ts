@@ -11,6 +11,7 @@ import { LoginPageModule } from '../modules/login-page/login-page.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupModule } from '../modules/signup/signup.module';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { httpInterceptorProviders } from 'src/interceptors';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
+    httpInterceptorProviders
   ],
   bootstrap: [AppComponent],
 })

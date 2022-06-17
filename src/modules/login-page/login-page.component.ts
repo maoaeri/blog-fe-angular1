@@ -14,6 +14,7 @@ export class LoginPageComponent implements OnInit {
   form!: FormGroup;
   loading = false;
   submitted = false;
+  messageError:string | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,7 +38,6 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.submitted)
     // // reset alerts on submit
     // // this.alertService.clear();
 
@@ -45,8 +45,6 @@ export class LoginPageComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
-
 
     this.loading = true;
     this.userService
@@ -58,8 +56,9 @@ export class LoginPageComponent implements OnInit {
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           this.router.navigateByUrl(returnUrl);
         },
-        error: (error: any) => {
+        error: (err: Error) => {
           // this.alertService.error(error);
+          this.messageError = err.message;
           this.loading = false;
         },
       });

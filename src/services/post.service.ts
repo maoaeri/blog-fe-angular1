@@ -16,31 +16,31 @@ export class PostService {
   createPost(post: Post) {
     return this.http
       .post(`${environment.apiUrl}/posts`, JSON.stringify(post))
-      .pipe(catchError(this.errorHandler.handleError('createPost')));
+      // .pipe(catchError(this.errorHandler.handleError('createPost')));
   }
 
   updatePost(id: number, updateInfo: Post) {
     return this.http
       .put(`${environment.apiUrl}/posts/${id}`, JSON.stringify(updateInfo))
-      .pipe(catchError(this.errorHandler.handleError('updatePost')));
+      // .pipe(catchError(this.errorHandler.handleError('updatePost')));
   }
 
   deletePost(id: number) {
     return this.http
       .delete(`${environment.apiUrl}/posts/${id}`)
-      .pipe(catchError(this.errorHandler.handleError('deletePost')));
+      // .pipe(catchError(this.errorHandler.handleError('deletePost')));
   }
 
   deleteAllPosts() {
     return this.http
       .delete(`${environment.apiUrl}/posts`)
-      .pipe(catchError(this.errorHandler.handleError('deleteAllPosts')));
+      // .pipe(catchError(this.errorHandler.handleError('deleteAllPosts')));
   }
 
   getPost(id: number) {
     return this.http
       .get<Post>(`${environment.apiUrl}/posts/${id}`)
-      .pipe(catchError(this.errorHandler.handleError('getPost', null)));
+      // .pipe(catchError(this.errorHandler.handleError('getPost', null)));
   }
 
   getAllPosts(page: number) {
@@ -54,7 +54,7 @@ export class PostService {
         }
       )
       .pipe(
-        catchError(this.errorHandler.handleError('getAllPosts', []))
+        // catchError(this.errorHandler.handleError('getAllPosts', []))
         );
     return res
     }

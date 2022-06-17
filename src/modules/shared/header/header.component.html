@@ -1,6 +1,6 @@
 
 		<!-- Navbar goes here -->
-		<nav class="bg-rose-400 shadow-lg">
+		<nav class="bg-rose-400 shadow-lg text-xl">
 			<div class="max-w-6xl mx-auto px-4">
 				<div class="flex justify-between">
 					<div class="flex space-x-7">
@@ -14,17 +14,17 @@
 						<!-- Primary Navbar items -->
 						<div class="hidden md:flex items-center space-x-1">
               <div [ngClass]="router.url==='/' ? 'text-red-900 border-b-4 border-red-900' : 'text-white'">
-                <a href="" class="py-4 px-2 font-semibold ">Home</a>
+                <a href="./" class="py-4 px-2 font-semibold ">Home</a>
               </div>
               <div [ngClass]="router.url==='/aboutus' ? 'text-red-900 border-b-4 border-red-900' : 'text-white'">
-                <a href="" class="py-4 px-2 font-semibold ">About Us</a>
+                <a href="./aboutus" class="py-4 px-2 font-semibold ">About Us</a>
               </div>
 						</div>
 					</div>
 					<!-- Secondary Navbar items -->
 					<div class="hidden md:flex items-center space-x-3 ">
-						<a href="" class="py-2 px-2 font-medium text-white rounded hover:bg-red-900 hover:text-white transition duration-300">Log In</a>
-						<a href="" class="py-2 px-2 font-medium text-white hover:bg-red-900 rounded transition duration-300">Sign Up</a>
+						<a href="./login" class="py-2 px-2 font-medium text-white rounded hover:bg-red-900 hover:text-white transition duration-300">Log In</a>
+						<a href="./signup" class="py-2 px-2 font-medium text-white hover:bg-red-900 rounded transition duration-300">Sign Up</a>
 					</div>
 					<!-- Mobile menu button -->
 					<div class="md:hidden flex items-center">
@@ -54,4 +54,15 @@
 				</ul>
 			</div>
 		</nav>
+<header class="main-header">
+	<div class="">
+		<div class="flex justify-center">
+			<h1 class="text-rose-500" style="font-size: 120px">{{heading}}</h1>
+		</div>
+		<div class="flex justify-center">
+			<h2 class="text-xl">{{sub_heading}}</h2>
+		</div>
+	</div>
+	
+</header>
 

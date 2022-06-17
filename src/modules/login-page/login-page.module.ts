@@ -4,12 +4,14 @@ import { LoginPageComponent } from './login-page.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginPageRoutingModule } from './login-page-routing.module';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 
 
 @NgModule({
   declarations: [
-   LoginPageComponent
+   LoginPageComponent,
+   ForgetPasswordComponent
   ],
   imports: [
     FormsModule,

@@ -37,14 +37,14 @@ export class UserService {
       .post<User>(
         `${environment.apiUrl}/users/login`,
         JSON.stringify({ email, password }),
-        {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-          }),
-        }
+        // {
+        //   headers: new HttpHeaders({
+        //     'Content-Type': 'application/json',
+        //   }),
+        // }
       )
       .pipe(
-        catchError(this.errorHandler.handleError<User>(`login`)),
+        catchError(this.errorHandler.handleError),
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem(
@@ -71,11 +71,14 @@ export class UserService {
     return this.http.post(
       `${environment.apiUrl}/users/signup`,
       JSON.stringify(user),
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        }),
-      }
+      // {
+      //   headers: new HttpHeaders({
+      //     'Content-Type': 'application/json',
+      //   }),
+      // }
+    )
+    .pipe(
+      catchError(this.errorHandler.handleError),
     );
   }
 
@@ -83,7 +86,7 @@ export class UserService {
     return this.http
       .get<User[]>(`${environment.apiUrl}/users`)
       .pipe(
-        catchError(this.errorHandler.handleError<User[]>('getAllUsers', []))
+        catchError(this.errorHandler.handleError)
       );
   }
 
@@ -91,13 +94,13 @@ export class UserService {
     return this.http
       .get<User>(`${environment.apiUrl}/users/${id}`)
       .pipe(
-        catchError(this.errorHandler.handleError<User>(`getUserById ${id}`))
+        catchError(this.errorHandler.handleError)
       );
   }
 
   updateUser(id: number, updateInfo: User) {
     return this.http.put(`${environment.apiUrl}/users/${id}`, updateInfo).pipe(
-      catchError(this.errorHandler.handleError<User>(`updateUser ${id}`)),
+      catchError(this.errorHandler.handleError),
       map((x) => {
         if (this.userValue != null && id == this.userValue.userId) {
           let user = updateInfo;

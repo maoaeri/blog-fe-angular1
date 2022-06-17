@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtService } from 'src/services/jwt.service';
 
@@ -8,6 +8,8 @@ import { JwtService } from 'src/services/jwt.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @Input() heading !: string;
+  @Input() sub_heading !: string;
 
   constructor(
     public router: Router,

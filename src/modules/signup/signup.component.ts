@@ -14,6 +14,7 @@ export class SignupComponent implements OnInit {
   form!: FormGroup;
   loading = false;
   submitted = false;
+  messageError:string | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -71,7 +72,7 @@ export class SignupComponent implements OnInit {
           this.router.navigateByUrl(returnUrl);
         },
         error: (error: any) => {
-          // this.alertService.error(error);
+          this.messageError = error.message;
           this.loading = false;
         },
       });

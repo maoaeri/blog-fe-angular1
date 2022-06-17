@@ -70,7 +70,7 @@
     <div class="h-full px-6 text-gray-800">
       <div class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between xl:justify-center">
         <div class="shrink-1 mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="w-full" alt="Sample image" />
+          <a href="./"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="w-full" alt="Sample image" /></a>
         </div>
         <div class="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:ml-20 xl:w-5/12">
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -122,16 +122,13 @@
                 </div>
               </div>
   
-            <div class="mb-6 flex items-end justify-end">
-              <a href="#!" class="text-gray-800 justify-end">Forgot password?</a>
-            </div>
-  
             <div class="text-center lg:text-left form-group">
               <button [disabled]="loading" type="submit"
               class="inline-block rounded bg-rose-400 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-rose-600 hover:shadow-lg focus:bg-rose-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-rose-800 active:shadow-lg">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                Login
+                Sign Up
               </button>
+              <div *ngIf="messageError" class="invalid-feedback text-red-700">{{messageError}}</div>
               <!-- <button [disabled]="loading" class="btn btn-primary">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                 Login

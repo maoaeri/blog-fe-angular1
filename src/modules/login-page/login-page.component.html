@@ -1,17 +1,9 @@
-<!-- <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
-	</head> -->
     <section class="h-screen">
         <div class="h-full px-6 text-gray-800">
           <div class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between xl:justify-center">
             <div class="shrink-1 mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="w-full" alt="Sample image" />
+              <a href="./"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="w-full" alt="Sample image" /></a>
             </div>
             <div class="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:ml-20 xl:w-5/12">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -36,7 +28,7 @@
                     <input type="checkbox" class="form-check-input checked:bg-rose-600 float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-gray-300 bg-white bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-red-400 focus:outline-none" id="exampleCheck2" />
                     <label class="form-check-label inline-block text-gray-800">Remember me</label>
                   </div>
-                  <a href="#!" class="text-gray-800">Forgot password?</a>
+                  <a href="login/forgetpassword" class="text-gray-800">Forgot password?</a>
                 </div>
       
                 <div class="text-center lg:text-left form-group">
@@ -45,10 +37,7 @@
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Login
                   </button>
-                  <!-- <button [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Login
-                </button> -->
+                  <div *ngIf="messageError" class="invalid-feedback text-red-700">{{messageError}}</div>
                   <p class="mt-2 mb-0 pt-1 text-sm font-semibold">
                     Don't have an account?
                     <a routerLink="../signup" class="text-red-600 transition duration-200 ease-in-out hover:text-red-700 focus:text-red-700">Sign Up</a>
@@ -59,38 +48,3 @@
           </div>
         </div>
       </section>
-      
-      
-      
-
-
-	<!-- <body class="img js-fullheight" style="background-color: rgb(188, 95, 119);">
-        <div class="card">
-            <h4 class="card-header">Login</h4>
-            <div class="card-body">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                            <div *ngIf="f.email.errors.required">Email is required</div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                            <div *ngIf="f.password.errors.required">Password is required</div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button [disabled]="loading" class="btn btn-primary">
-                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                            Login
-                        </button>
-                        <a routerLink="../signup" class="btn btn-link">Sign Up</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-	</body> -->
