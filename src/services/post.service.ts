@@ -58,4 +58,8 @@ export class PostService {
         );
     return res
     }
+
+  searchPosts(query: string) {
+    // return 
+  }
 }

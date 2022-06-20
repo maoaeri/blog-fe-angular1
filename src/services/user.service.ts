@@ -6,6 +6,7 @@ import { User } from '../models/user.model';
 import { environment } from '../environments/environment';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from './error-handler.service';
+import { JwtService } from './jwt.service';
 // import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({ providedIn: 'root' })
@@ -16,7 +17,8 @@ export class UserService {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private jwtService: JwtService,
   ) {
     this.userSubject = new BehaviorSubject<User | null>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
@@ -37,11 +39,6 @@ export class UserService {
       .post<User>(
         `${environment.apiUrl}/users/login`,
         JSON.stringify({ email, password }),
-        // {
-        //   headers: new HttpHeaders({
-        //     'Content-Type': 'application/json',
-        //   }),
-        // }
       )
       .pipe(
         catchError(this.errorHandler.handleError),
@@ -60,11 +57,21 @@ export class UserService {
   logout() {
     // remove user from local storage and set current user to null
     localStorage.removeItem('user');
+    localStorage.removeItem('jwt_token');
     this.userSubject.next(null);
-    this.router.navigate(['/users/login']);
+    this.router.navigate(['/']);
   }
 
-  isLoggedIn() {}
+  isLoggedIn(): boolean {
+    console.log(this.jwtService.isNotExpired())
+    if (localStorage.getItem('jwt_token') !== null && !
+    this.jwtService.isNotExpired()) {
+      return true;
+    } else {
+      // this.logout();
+      return false;
+    }
+  }
 
   signup(user: User) {
     console.log(user);

@@ -5,17 +5,19 @@ import { SharedRoutingModule } from './shared-routing.module';
 // import { AboutusComponent } from '../aboutus/aboutus.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent],
+  declarations: [HeaderComponent, FooterComponent, SearchBarComponent],
   imports: [
     CommonModule,
     SharedRoutingModule
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SearchBarComponent
   ]
 })
 export class SharedModule { }

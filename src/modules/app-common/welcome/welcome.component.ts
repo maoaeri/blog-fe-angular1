@@ -3,6 +3,7 @@ import { Post } from 'src/models/post.model';
 import { PostService } from 'src/services/post.service';
 import { JwtService } from '../../../services/jwt.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-welcome',
@@ -11,11 +12,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
 
+
   page !: number
   posts : Post[] = []
 
+
   constructor(
     private jwtService: JwtService,
+
     private postService: PostService,
     private route: ActivatedRoute,
   ) {}
@@ -28,6 +32,7 @@ export class WelcomeComponent implements OnInit {
         console.log(this.page); // price
       }
     );
+
     this.posts=[];
     console.log(this.posts);
     this.getAllPosts(this.page);

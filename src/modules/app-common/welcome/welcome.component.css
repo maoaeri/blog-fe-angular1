@@ -14,7 +14,7 @@ h1 {
     transform: translate(-50%, -50%);
 }
 
-button {
+/* button {
   align-items: center;
   appearance: none;
   background-image: radial-gradient(100% 100% at 100% 0, #f390c5 0, #ef38a0 100%);
@@ -60,4 +60,4 @@ button:hover {
 button:active {
   box-shadow: #ee1245 0 3px 7px inset;
   transform: translateY(02x);
-}
+} */
