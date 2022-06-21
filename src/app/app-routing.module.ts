@@ -31,6 +31,13 @@ const routes: Routes = [
     ),
   },
   {
+    path: 'search',
+    loadChildren: () =>
+    import('../modules/search/search-routing.module').then(
+        m => m.SearchRoutingModule
+    ),
+  },
+  {
     path: '**',
     loadChildren: () =>
     import('../modules/page-not-found/page-not-found-routing.module').then(

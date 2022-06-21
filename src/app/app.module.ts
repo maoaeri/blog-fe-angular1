@@ -14,6 +14,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { httpInterceptorProviders } from 'src/interceptors';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { SearchModule } from 'src/modules/search/search.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     AppCommonModule,
     LoginPageModule,
     SignupModule,
+    SearchModule,
     InfiniteScrollModule,
     NgxCaptchaModule
   ],
