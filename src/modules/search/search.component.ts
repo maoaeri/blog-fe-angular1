@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Post } from 'src/models/post.model';
+import { PostService } from 'src/services/post.service';
 
 @Component({
   selector: 'app-search',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  posts : Post[] = [];
+
+  constructor(
+    private postService: PostService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    const q = this.route.snapshot.queryParams["q"];
+    if (q!== undefined) {
+      this.postService.searchPosts(q)
+      .subscribe({
+        next: (posts) => {
+          this.posts = posts;
+        console.log(this.posts)
+      },
+        error: (err: Error) => {
+          console.log(err.message)
+        }})}
   }
 
 }

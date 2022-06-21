@@ -19,7 +19,6 @@ export class WelcomeComponent implements OnInit {
 
   constructor(
     private jwtService: JwtService,
-
     private postService: PostService,
     private route: ActivatedRoute,
   ) {}

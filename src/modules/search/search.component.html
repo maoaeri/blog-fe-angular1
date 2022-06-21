@@ -1,4 +1,17 @@
 <app-header heading="Search" subheading="Have you found the one you're looking for?"></app-header>
 <app-search-bar></app-search-bar>
+<div class=""  >
+        <div *ngFor="let post of posts">
+            <div class="grid grid-cols-7">
+                <div class="col-start-3 col-end-6 col-span-3 mt-20">
+                    <img [src]="post.backgroundUrl" alt="">
+                    <h3 class="flex justify-center text-3xl"><a href="">{{post.heading}}</a></h3>
+                    <h4 class="text-md">{{post.content}}</h4>
+                </div>
+
+            </div>
+
+        </div>
+    </div> 
 <div class="container h-screen"></div>
 <app-footer></app-footer>
