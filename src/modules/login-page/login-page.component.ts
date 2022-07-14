@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-page',
@@ -15,6 +16,8 @@ export class LoginPageComponent implements OnInit {
   loading = false;
   submitted = false;
   messageError:string | undefined;
+  IP = "a";
+  isTooMuchAttempts = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,6 +28,7 @@ export class LoginPageComponent implements OnInit {
   {}
 
   ngOnInit() {
+    this.getIPAdress();
     this.form = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -36,7 +40,16 @@ export class LoginPageComponent implements OnInit {
     return this.form.controls;
   }
 
+  getIPAdress() {
+    this.userService.getIPAdress()
+    .subscribe(
+      (res:any)=>{
+    this.IP = res.ip;
+  });
+  }
+
   onSubmit() {
+    console.log(this.IP);
     this.submitted = true;
     // // reset alerts on submit
     // // this.alertService.clear();
@@ -56,10 +69,20 @@ export class LoginPageComponent implements OnInit {
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           this.router.navigateByUrl(returnUrl);
         },
-        error: (err: Error) => {
+        error: (err: HttpErrorResponse) => {
           // this.alertService.error(error);
-          this.messageError = err.message;
+          this.messageError = err.error.message;
           this.loading = false;
+          this.userService
+            .checkLoginFailed(this.IP)
+            .subscribe({
+              next: () => {},
+              error: (err: HttpErrorResponse) => {
+                if (err.status == 400){
+                  console.log("hihi")
+                }
+              }
+            })
         },
       });
   }

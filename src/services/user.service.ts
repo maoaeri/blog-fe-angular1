@@ -7,6 +7,7 @@ import { environment } from '../environments/environment';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from './error-handler.service';
 import { JwtService } from './jwt.service';
+import { isPlatformBrowser } from '@angular/common';
 // import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({ providedIn: 'root' })
@@ -24,6 +25,7 @@ export class UserService {
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
     this.user = this.userSubject.asObservable();
+    
   }
 
   public get userValue(): User | null {
@@ -78,11 +80,6 @@ export class UserService {
     return this.http.post(
       `${environment.apiUrl}/users/signup`,
       JSON.stringify(user),
-      // {
-      //   headers: new HttpHeaders({
-      //     'Content-Type': 'application/json',
-      //   }),
-      // }
     )
     .pipe(
       catchError(this.errorHandler.handleError),
@@ -118,4 +115,17 @@ export class UserService {
       })
     );
   }
+
+  getIPAdress() {
+    return this.http.get("http://api.ipify.org/?format=json");
+  }
+
+  checkLoginFailed(ip: string) {
+    return this.http
+      .get(`${environment.apiUrl}/users/loginfailed?ip=${ip}`)
+      .pipe(
+        catchError(this.errorHandler.handleError)
+      );
+  }
+
 }

@@ -21,6 +21,6 @@ export class ErrorHandlerService {
             // console.log(`${operation} failed: ${error.message}`);
         
             // Let the app keep running by returning an empty result.
-            return throwError(new Error(error.error.message));
+            return throwError(error);
         }
 }

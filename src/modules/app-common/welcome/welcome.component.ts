@@ -11,8 +11,6 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./welcome.component.css'],
 })
 export class WelcomeComponent implements OnInit {
-
-
   page !: number
   posts : Post[] = []
 
