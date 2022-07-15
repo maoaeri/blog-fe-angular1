@@ -1,2 +1,3 @@
-<p *ngIf="messageSuccess">{{messageSuccess}}</p>
-<p *ngIf="messageError">{{messageError}}</p>
+<p *ngIf="messageSuccess && !check">{{messageSuccess}}</p>
+<p *ngIf="messageError && !check">{{messageError}}</p>
+<app-reset-password *ngIf="check" [email]="email"></app-reset-password>

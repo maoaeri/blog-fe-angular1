@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/services/user.service';
@@ -15,6 +15,7 @@ export class ResetPasswordComponent implements OnInit {
   submitted = false;
   response !: string;
   messageError !:string;
+  @Input() email!:string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,10 +26,15 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      email: ['', Validators.required],
       password: ['', Validators.required, Validators.minLength(6)],
       againpassword: ['', Validators.required, Validators.minLength(6)],
     });
+    // const ans = localStorage.getItem("email");
+    // if (ans === null) {
+    //   this.email = "";
+    // } else {
+    //   this.email = ans;
+    // }
   }
 
   get f() {
@@ -39,14 +45,14 @@ export class ResetPasswordComponent implements OnInit {
     this.submitted = true;
     // this.loading = true;
     if (this.f.password.value !== this.f.againpassword.value){
-      this.response = "Password not match."
+      this.messageError = "Password not match."
       // return;
     }
     if (this.form.invalid) {
       // return;
     }
     this.userService
-      .resetPassword(this.f.email.value, this.f.password.value)
+      .resetPassword(this.email, this.f.password.value)
       .subscribe({
         next: () => {
           // get return url from query parameters or default to home page

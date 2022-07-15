@@ -66,8 +66,7 @@ export class UserService {
 
   isLoggedIn(): boolean {
     console.log(this.jwtService.isNotExpired())
-    if (localStorage.getItem('jwt_token') !== null && !
-    this.jwtService.isNotExpired()) {
+    if (localStorage.getItem('jwt_token') !== null && this.jwtService.isNotExpired()) {
       return true;
     } else {
       // this.logout();

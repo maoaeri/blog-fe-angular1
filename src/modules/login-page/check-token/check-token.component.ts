@@ -13,6 +13,8 @@ export class CheckTokenComponent implements OnInit {
   token !: string;
   messageSuccess !: string;
   messageError !: string;
+  check = false;
+  email !: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,12 +31,13 @@ export class CheckTokenComponent implements OnInit {
     );
     this.userService.checkToken(this.token)
       .subscribe({
-        next: () => {
+        next: (info: any) => {
           this.messageSuccess = "Redirecting..."
           setTimeout(() => {
-            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/resetpassword';
-            this.router.navigateByUrl(returnUrl);
-          }, 5000)
+            this.check = true;
+          }, 5000);
+          console.log(info.email);
+          this.email = info.email;
         },
         error: (err: HttpErrorResponse) => {
           // this.alertService.error(error);
