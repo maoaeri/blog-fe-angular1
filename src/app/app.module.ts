@@ -15,6 +15,7 @@ import { httpInterceptorProviders } from 'src/interceptors';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { SearchModule } from 'src/modules/search/search.module';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,7 @@ import { SearchModule } from 'src/modules/search/search.module';
     SignupModule,
     SearchModule,
     InfiniteScrollModule,
-    NgxCaptchaModule
+    RecaptchaModule
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

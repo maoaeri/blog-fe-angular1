@@ -15,9 +15,10 @@ export class LoginPageComponent implements OnInit {
   form!: FormGroup;
   loading = false;
   submitted = false;
-  messageError:string | undefined;
+  messageError !:string;
   IP = "a";
-  isTooMuchAttempts = false;
+  turnOnCaptcha = false;
+  resolve = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,8 +49,12 @@ export class LoginPageComponent implements OnInit {
   });
   }
 
+  public resolved(captchaResponse: string): void {
+    this.resolve = true
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
+
   onSubmit() {
-    console.log(this.IP);
     this.submitted = true;
     // // reset alerts on submit
     // // this.alertService.clear();
@@ -58,7 +63,14 @@ export class LoginPageComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
+    if (this.resolve){
+      this.userService
+      .deleteLoginFailed(this.IP)
+      .subscribe(()=>{
+        this.turnOnCaptcha = false;
+        console.log(this.turnOnCaptcha);
+       })
+    }
     this.loading = true;
     this.userService
       .login(this.f.email.value, this.f.password.value)
@@ -79,7 +91,8 @@ export class LoginPageComponent implements OnInit {
               next: () => {},
               error: (err: HttpErrorResponse) => {
                 if (err.status == 400){
-                  console.log("hihi")
+                  this.turnOnCaptcha = true;
+                  console.log(this.turnOnCaptcha);
                 }
               }
             })

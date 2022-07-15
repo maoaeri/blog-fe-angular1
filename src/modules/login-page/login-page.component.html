@@ -30,7 +30,9 @@
                   </div>
                   <a href="login/forgetpassword" class="text-gray-800">Forgot password?</a>
                 </div>
-      
+                <div *ngIf="turnOnCaptcha">
+                  <re-captcha (resolved)="resolved($event)" siteKey="6LcVPe8gAAAAAEHfCq4olwmvVsEFkNNn6tRacdAp"></re-captcha>
+                </div>
                 <div class="text-center lg:text-left form-group">
                   <button [disabled]="loading" type="submit"
                   class="inline-block rounded bg-rose-400 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-rose-600 hover:shadow-lg focus:bg-rose-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-rose-800 active:shadow-lg">

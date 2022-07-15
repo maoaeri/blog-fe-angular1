@@ -128,4 +128,43 @@ export class UserService {
       );
   }
 
+  deleteLoginFailed(ip: string) {
+    return this.http
+      .delete(`${environment.apiUrl}/users/loginfailed?ip=${ip}`)
+      .pipe(
+        catchError(this.errorHandler.handleError)
+      );
+  }
+
+  resetPassword(email: string, password: string) {
+    return this.http
+      .post(
+        `${environment.apiUrl}/users/resetpassword`,
+        JSON.stringify({ email, password })
+      )
+      .pipe(
+        catchError(this.errorHandler.handleError),
+      )  
+  }
+
+  forgotPassword(email: string) {
+    return this.http
+      .post(
+        `${environment.apiUrl}/users/forgotpassword`,
+        JSON.stringify({ email})
+      )
+      .pipe(
+        catchError(this.errorHandler.handleError),
+      )
+  }
+
+  checkToken(token: string){
+    return this.http
+      .get(
+        `${environment.apiUrl}/users/forgotpassword?token=${token}`
+      )
+      .pipe(
+        catchError(this.errorHandler.handleError),
+      )
+  }
 }

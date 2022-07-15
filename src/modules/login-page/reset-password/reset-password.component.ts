@@ -5,16 +5,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/services/user.service';
 
 @Component({
-  selector: 'app-forget-password',
-  templateUrl: './forget-password.component.html',
-  styleUrls: ['./forget-password.component.css']
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.css']
 })
-export class ForgetPasswordComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit {
   form !: FormGroup;
   loading = false;
   submitted = false;
   response !: string;
-  messageError!: string;
+  messageError !:string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,6 +26,8 @@ export class ForgetPasswordComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       email: ['', Validators.required],
+      password: ['', Validators.required, Validators.minLength(6)],
+      againpassword: ['', Validators.required, Validators.minLength(6)],
     });
   }
 
@@ -34,28 +36,28 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   onSubmit(){
-    this.loading = true;
-
+    this.submitted = true;
+    // this.loading = true;
+    if (this.f.password.value !== this.f.againpassword.value){
+      this.response = "Password not match."
+      // return;
+    }
+    if (this.form.invalid) {
+      // return;
+    }
     this.userService
-      .forgotPassword(this.f.email.value)
+      .resetPassword(this.f.email.value, this.f.password.value)
       .subscribe({
         next: () => {
           // get return url from query parameters or default to home page
-          setTimeout(() => {
-            this.loading = false;
-            this.response = "We have sent a notification mail to your address. Please check your email!";
-            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'login/';
-            this.router.navigateByUrl(returnUrl);
-          }, 1000)
-
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/login';
+          this.router.navigateByUrl(returnUrl);
         },
-        error: (err: HttpErrorResponse) => {
-          // this.alertService.error(error);
+        error: (err:HttpErrorResponse) => {
           this.messageError = err.error.message;
           this.loading = false;
-        } 
-      })
-    this.submitted = true;
+        }
+      });
   }
 
 }
