@@ -44,9 +44,11 @@ export class ForgetPasswordComponent implements OnInit {
           setTimeout(() => {
             this.loading = false;
             this.response = "We have sent a notification mail to your address. Please check your email!";
-            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'login/';
-            this.router.navigateByUrl(returnUrl);
           }, 1000)
+          setTimeout(() => {
+            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/login';
+            this.router.navigateByUrl(returnUrl);
+          }, 5000)
 
         },
         error: (err: HttpErrorResponse) => {
