@@ -69,6 +69,7 @@ export class LoginPageComponent implements OnInit {
       .subscribe(()=>{
         this.turnOnCaptcha = false;
         console.log(this.turnOnCaptcha);
+        this.resolve = false;
        })
     }
     this.loading = true;

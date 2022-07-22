@@ -51,13 +51,16 @@ export class SignupComponent implements OnInit {
       return;
     }
 
+    var date = new Date(this.f.birthday.value); 
+
     let data: User = {
       userId: null,
       username: this.f.username.value,
       email: this.f.email.value,
       password: this.f.password.value,
       fullname: this.f.fullname.value,
-      birthday: this.f.birthday.value,
+      // birthday: this.f.birthday.value,
+      birthday: date.toISOString(),
       address: this.f.address.value,
     };
 

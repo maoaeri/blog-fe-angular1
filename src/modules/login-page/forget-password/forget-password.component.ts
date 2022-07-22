@@ -49,7 +49,6 @@ export class ForgetPasswordComponent implements OnInit {
             const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/login';
             this.router.navigateByUrl(returnUrl);
           }, 5000)
-
         },
         error: (err: HttpErrorResponse) => {
           // this.alertService.error(error);
