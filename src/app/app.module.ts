@@ -16,6 +16,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { SearchModule } from 'src/modules/search/search.module';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { PostModule } from 'src/modules/post/post.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
     LoginPageModule,
     SignupModule,
     SearchModule,
+    PostModule,
     InfiniteScrollModule,
     RecaptchaModule
   ],

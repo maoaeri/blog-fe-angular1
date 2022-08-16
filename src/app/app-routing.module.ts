@@ -38,12 +38,20 @@ const routes: Routes = [
     ),
   },
   {
+    path: 'post',
+    loadChildren: () =>
+    import('../modules/post/post-routing.module').then(
+        m => m.PostRoutingModule
+    ),
+  },
+  {
     path: '**',
     loadChildren: () =>
     import('../modules/page-not-found/page-not-found-routing.module').then(
         m => m.PageNotFoundRoutingModule
     ),
   },
+  
 
 ];
 

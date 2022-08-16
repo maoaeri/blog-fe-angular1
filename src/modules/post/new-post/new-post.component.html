@@ -1,0 +1,15 @@
+<app-header heading="New Post" sub_heading="Do you want a new post?"></app-header>
+<div class="pl-20 w-5/6">   
+    <div class="flex justify-center mt-20">
+        <div class="w-5/6">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <!-- Title -->
+                <div class="w-full">
+                    <input type="text" class="form-control text-xl block rounded border border-dashed w-full" placeholder="Title" formControlName="title">
+    
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div> 
