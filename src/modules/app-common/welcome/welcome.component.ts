@@ -22,28 +22,34 @@ export class WelcomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams
-      .subscribe(params => {
-        console.log(params); // { orderby: "price" }
-        this.page = parseInt(params.page);
-        console.log(this.page); // price
-      }
-    );
+    // this.route.queryParams
+    //   .subscribe(params => {
+    //     console.log(params); // { orderby: "price" }
+    //     this.page = parseInt(params.page);
+    //     console.log(this.page); // price
+    //   }
+    // );
+    this.page = 1;
 
     this.posts=[];
     console.log(this.posts);
-    this.getAllPosts(this.page);
+    this.getAllPosts(1);
   }
 
   getAllPosts(page:number): void{
     this.postService.getAllPosts(page)
     .subscribe(posts => {
-      this.posts = posts;
+      this.posts.push(...posts);
     console.log(this.posts)})
   }
 
   onScroll() {
-    console.log("scrolled!!");
+    // this.posts.push()
+    // this.page ++;
+    console.log(this.page);
+      this.page ++;
+      this.getAllPosts(this.page);
+    console.log("scrolled");
   }
 
 }

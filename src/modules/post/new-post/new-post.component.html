@@ -3,13 +3,39 @@
     <div class="flex justify-center mt-20">
         <div class="w-5/6">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <!-- Title -->
-                <div class="w-full">
-                    <input type="text" class="form-control text-xl block rounded border border-dashed w-full" placeholder="Title" formControlName="title">
-    
+                <!-- Heading -->
+                <div class="w-full ml-40 mt-10">
+                    <input type="text" class="form-control text-xl block rounded border border-solid w-1/2 h-12 border-gray-500" placeholder="Heading" formControlName="heading">
+                    <div *ngIf="submitted && f.heading.errors" class="invalid-feedback text-red-700">
+                        <div *ngIf="f.heading.errors.required">Heading is required</div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="w-full ml-40 mt-10">
+                    <textarea name="content" cols="33" row="5" class="form-control text-xl block rounded border border-solid w-1/2 h-40 border-gray-500" placeholder="Content" formControlName="content"></textarea>
+                    <div *ngIf="submitted && f.content.errors" class="invalid-feedback text-red-700">
+                        <div *ngIf="f.content.errors.required">Title is required</div>
+                    </div>
+                </div>
+
+                <!-- Background Url -->
+                <div class="w-full ml-40 mt-10">
+                    <input type="text" class="form-control text-xl block rounded border border-solid w-1/2 h-12 border-gray-500" placeholder="Background Url" formControlName="bgurl">
+                </div>
+
+                <button [disabled]="loading" type="submit"
+                  class="ml-40  mb-10 mt-10 inline-block rounded bg-rose-400 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-rose-600 hover:shadow-lg focus:bg-rose-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-rose-800 active:shadow-lg">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Submit
+                </button>
+
+                <div *ngIf="submitted && messageError != ''" class="invalid-feedback text-red-700">
+                    {{messageError}}
                 </div>
             </form>
         </div>
         
     </div>
-</div> 
+</div>
+<app-footer></app-footer>

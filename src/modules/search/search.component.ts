@@ -9,8 +9,7 @@ import { PostService } from 'src/services/post.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-
-  posts : Post[] = [];
+  posts: any;
 
   constructor(
     private postService: PostService,
@@ -20,15 +19,25 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     const q = this.route.snapshot.queryParams["q"];
     if (q!== undefined) {
-      this.postService.searchPosts(q)
+      this.getAllPosts(q);
+      console.log(this.posts);
+    }
+        
+  }
+
+  getAllPosts(q: string){
+    this.postService.searchPosts(q)
       .subscribe({
-        next: (posts) => {
+        next: posts => {
           this.posts = posts;
-        console.log(this.posts)
+          console.log(this.posts);
       },
         error: (err: Error) => {
           console.log(err.message)
-        }})}
+        }
+      })
+    console.log(this.posts);
   }
+  
 
 }

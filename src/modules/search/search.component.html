@@ -4,9 +4,9 @@
         <div *ngFor="let post of posts">
             <div class="grid grid-cols-7">
                 <div class="col-start-3 col-end-6 col-span-3 mt-20">
-                    <img [src]="post.backgroundUrl" alt="">
-                    <h3 class="flex justify-center text-3xl"><a href="">{{post.heading}}</a></h3>
-                    <h4 class="text-md">{{post.content}}</h4>
+                    <img [src]="post.Post.backgroundUrl" alt="">
+                    <h3 class="flex justify-center text-3xl"><a href="">{{post.Post.heading}}</a></h3>
+                    <h4 class="text-md">{{post.Post.content}}</h4>
                 </div>
 
             </div>

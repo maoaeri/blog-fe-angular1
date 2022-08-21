@@ -47,21 +47,14 @@ export class PostService {
     const res = this.http
       .get<Post[]>(
         `${environment.apiUrl}/posts?page=${page}`,
-        // {
-        //   headers: new HttpHeaders({
-        //     'Authorization': 'Bearer '+localStorage.getItem('jwt_token'),
-        //   }),
-        // }
       )
-      .pipe(
-        // catchError(this.errorHandler.handleError('getAllPosts', []))
-        );
+      // .pipe();
     return res
     }
 
   searchPosts(query: string) {
     return this.http
-    .get<Post[]>(
+    .get(
       `${environment.apiUrl}/posts/search?q=${query}`
     )
     .pipe(

@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService
-  ) // private alertService: AlertService
+  )
   {}
 
   ngOnInit() {
