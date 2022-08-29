@@ -19,4 +19,4 @@ EXPOSE $PORT
 
 
 # start app
-CMD ng serve --host 0.0.0.0
+CMD ng serve --host 0.0.0.0 --port $PORT
