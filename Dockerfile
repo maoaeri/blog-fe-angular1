@@ -15,7 +15,7 @@ RUN npm install -g @angular/cli@13.3.8
 # add app
 COPY . /app
 
-EXPOSE 4200
+EXPOSE $PORT
 
 
 # start app
